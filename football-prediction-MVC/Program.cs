@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using football_prediction_MVC.Data;
+using football_prediction_MVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,19 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
 // MVC
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<IPredictionService, PredictionService>((serviceProvider, client) =>
+{
+    client.ConfigureApiClient(serviceProvider.GetRequiredService<IConfiguration>());
+});
+builder.Services.AddHttpClient<IDataService, DataService>((serviceProvider, client) =>
+{
+    client.ConfigureApiClient(serviceProvider.GetRequiredService<IConfiguration>());
+});
+builder.Services.AddHttpClient<ITrainingService, TrainingService>((serviceProvider, client) =>
+{
+    client.ConfigureApiClient(serviceProvider.GetRequiredService<IConfiguration>());
+});
 
 // Authorization policies
 builder.Services.AddAuthorization(options =>

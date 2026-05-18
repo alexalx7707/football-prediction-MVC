@@ -1,7 +1,213 @@
-﻿@{
-    ViewData["Title"] = "User Area";
+﻿@model football_prediction_MVC.Models.ViewModels.UserDataViewModel
+@using System.Linq
+
+@{
+    ViewData["Title"] = "Explorare date";
 }
 
-<h1>User Area</h1>
-<p>Welcome! This page is available to all authenticated users (User and Admin roles).</p>
-<a asp-controller="User" asp-action="Profile">View Profile</a>
+<section class="page-header">
+    <div>
+        <h1>Explorare date</h1>
+        <p class="lead">Interogheaza meciuri si ratinguri Elo direct din API.</p>
+    </div>
+    <a class="btn btn-outline-light" asp-controller="User" asp-action="Profile">Profil</a>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+@if (!string.IsNullOrWhiteSpace(Model.InfoMessage))
+{
+    <div class="alert alert-success">@Model.InfoMessage</div>
+}
+
+<section class="card-grid">
+    <div class="card">
+        <h2>Statistici dataset</h2>
+        <p class="muted">Numarul de documente din /data/stats.</p>
+        @if (Model.Stats?.Collections?.Count > 0)
+        {
+            <div class="stat-grid">
+                @foreach (var item in Model.Stats.Collections)
+                {
+                    <div class="stat-chip">
+                        <span>@item.Collection</span>
+                        <strong>@item.DocumentCount</strong>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="muted">Nu exista statistici disponibile.</p>
+        }
+    </div>
+
+    <div class="card">
+        <h2>Interogare meciuri</h2>
+        <p class="muted">Cauta dupa echipa gazda, echipa oaspete si sezon.</p>
+        <form asp-action="SearchMatches" method="post" class="form-grid">
+            <div>
+                <label class="form-label">Echipa gazda</label>
+                <input class="form-control" asp-for="MatchQuery.HomeTeam" placeholder="Oricare" />
+            </div>
+            <div>
+                <label class="form-label">Echipa oaspete</label>
+                <input class="form-control" asp-for="MatchQuery.AwayTeam" placeholder="Oricare" />
+            </div>
+            <div>
+                <label class="form-label">Data inceput</label>
+                <input class="form-control" asp-for="MatchQuery.DateFrom" type="date" />
+            </div>
+            <div>
+                <label class="form-label">Data sfarsit</label>
+                <input class="form-control" asp-for="MatchQuery.DateTo" type="date" />
+            </div>
+            <div>
+                <label class="form-label">Dimensiune pagina</label>
+                <input class="form-control" asp-for="MatchPageSize" type="number" min="10" max="200" />
+            </div>
+            <div>
+                <label class="form-label">Pagina</label>
+                <input class="form-control" asp-for="MatchPage" type="number" min="1" />
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Cauta meciuri</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Rezultate meciuri</h2>
+    @if (Model.Matches.Count == 0)
+    {
+        <p class="muted">Nu exista rezultate pentru meciuri.</p>
+    }
+    else
+    {
+        var matchHeaders = Model.Matches.First().Keys.ToList();
+        var matchCanPrev = Model.MatchPage > 1;
+        var matchCanNext = Model.MatchFetchedCount >= Model.MatchPage * Model.MatchPageSize;
+        <div class="table-wrap">
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        @foreach (var header in matchHeaders)
+                        {
+                            <th>@header</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in Model.Matches)
+                    {
+                        <tr>
+                            @foreach (var header in matchHeaders)
+                            {
+                                <td>@row[header].ToString()</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="pager">
+            <form asp-action="SearchMatches" method="post">
+                <input type="hidden" name="MatchQuery.HomeTeam" value="@Model.MatchQuery.HomeTeam" />
+                <input type="hidden" name="MatchQuery.AwayTeam" value="@Model.MatchQuery.AwayTeam" />
+                <input type="hidden" name="MatchQuery.DateFrom" value="@Model.MatchQuery.DateFrom" />
+                <input type="hidden" name="MatchQuery.DateTo" value="@Model.MatchQuery.DateTo" />
+                <input type="hidden" name="MatchPageSize" value="@Model.MatchPageSize" />
+                <input type="hidden" name="MatchPage" value="@(Model.MatchPage - 1)" />
+                <button class="btn btn-outline-light" type="submit" @(matchCanPrev ? null : "disabled")>Inapoi</button>
+            </form>
+            <span class="muted">Pagina @Model.MatchPage</span>
+            <form asp-action="SearchMatches" method="post">
+                <input type="hidden" name="MatchQuery.HomeTeam" value="@Model.MatchQuery.HomeTeam" />
+                <input type="hidden" name="MatchQuery.AwayTeam" value="@Model.MatchQuery.AwayTeam" />
+                <input type="hidden" name="MatchQuery.DateFrom" value="@Model.MatchQuery.DateFrom" />
+                <input type="hidden" name="MatchQuery.DateTo" value="@Model.MatchQuery.DateTo" />
+                <input type="hidden" name="MatchPageSize" value="@Model.MatchPageSize" />
+                <input type="hidden" name="MatchPage" value="@(Model.MatchPage + 1)" />
+                <button class="btn btn-outline-light" type="submit" @(matchCanNext ? null : "disabled")>Urmator</button>
+            </form>
+        </div>
+    }
+</section>
+
+<section class="card-grid">
+    <div class="card">
+        <h2>Interogare Elo</h2>
+        <p class="muted">Filtreaza dupa club si limiteaza rezultatele.</p>
+        <form asp-action="SearchElo" method="post" class="form-grid">
+            <div>
+                <label class="form-label">Club</label>
+                <input class="form-control" asp-for="EloQuery.Club" placeholder="ex. Barcelona" />
+            </div>
+            <div>
+                <label class="form-label">Dimensiune pagina</label>
+                <input class="form-control" asp-for="EloPageSize" type="number" min="10" max="200" />
+            </div>
+            <div>
+                <label class="form-label">Pagina</label>
+                <input class="form-control" asp-for="EloPage" type="number" min="1" />
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Cauta Elo</button>
+            </div>
+        </form>
+    </div>
+    <div class="card">
+        <h2>Rezultate Elo</h2>
+        @if (Model.EloRatings.Count == 0)
+        {
+            <p class="muted">Nu exista rezultate Elo.</p>
+        }
+        else
+        {
+            var eloHeaders = Model.EloRatings.First().Keys.ToList();
+            var eloCanPrev = Model.EloPage > 1;
+            var eloCanNext = Model.EloFetchedCount >= Model.EloPage * Model.EloPageSize;
+            <div class="table-wrap">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            @foreach (var header in eloHeaders)
+                            {
+                                <th>@header</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in Model.EloRatings)
+                        {
+                            <tr>
+                                @foreach (var header in eloHeaders)
+                                {
+                                    <td>@row[header].ToString()</td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="pager">
+                <form asp-action="SearchElo" method="post">
+                    <input type="hidden" name="EloQuery.Club" value="@Model.EloQuery.Club" />
+                    <input type="hidden" name="EloPageSize" value="@Model.EloPageSize" />
+                    <input type="hidden" name="EloPage" value="@(Model.EloPage - 1)" />
+                    <button class="btn btn-outline-light" type="submit" @(eloCanPrev ? null : "disabled")>Inapoi</button>
+                </form>
+                <span class="muted">Pagina @Model.EloPage</span>
+                <form asp-action="SearchElo" method="post">
+                    <input type="hidden" name="EloQuery.Club" value="@Model.EloQuery.Club" />
+                    <input type="hidden" name="EloPageSize" value="@Model.EloPageSize" />
+                    <input type="hidden" name="EloPage" value="@(Model.EloPage + 1)" />
+                    <button class="btn btn-outline-light" type="submit" @(eloCanNext ? null : "disabled")>Urmator</button>
+                </form>
+            </div>
+        }
+    </div>
+</section>

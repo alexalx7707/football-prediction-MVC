@@ -1,8 +1,100 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model football_prediction_MVC.Models.ViewModels.PredictionPageViewModel
+
+@{
+    ViewData["Title"] = "Predictii meciuri";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Football Predictions</h1>
-    <p>Get started with your football match predictions.</p>
-</div>
+<section class="hero">
+    <div>
+        <span class="eyebrow">Predictii Fotbal ML</span>
+        <h1>Prezice meciul inainte de fluier.</h1>
+        <p class="lead">Introdu doua echipe, foloseste contextul Elo si obtine un rezultat cu incredere estimata.</p>
+    </div>
+    <div class="hero-panel">
+        <div class="hero-stat">
+            <span class="label">Model</span>
+            <strong>Random Forest</strong>
+        </div>
+        <div class="hero-stat">
+            <span class="label">Semnale</span>
+            <strong>Elo + Forma</strong>
+        </div>
+        <div class="hero-stat">
+            <span class="label">Mod</span>
+            <strong>API live</strong>
+        </div>
+    </div>
+</section>
+
+<section class="card-grid">
+    <div class="card">
+        <h2>Consola de predictii</h2>
+        <p class="muted">Foloseste endpoint-ul /predict cu echipa gazda si echipa oaspete.</p>
+
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger">@Model.ErrorMessage</div>
+        }
+
+        <form asp-action="Predict" method="post" class="form-grid">
+            <div>
+                <label class="form-label">Echipa gazda</label>
+                <input class="form-control" asp-for="HomeTeam" placeholder="ex. Manchester City" />
+            </div>
+            <div>
+                <label class="form-label">Echipa oaspete</label>
+                <input class="form-control" asp-for="AwayTeam" placeholder="ex. Arsenal" />
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Ruleaza predictia</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="card card-highlight">
+        <h2>Rezultat recent</h2>
+        @if (Model.Result == null)
+        {
+            <p class="muted">Trimite un meci pentru a vedea probabilitatile si diferenta Elo.</p>
+        }
+        else
+        {
+            <div class="result-title">@Model.Result.Match</div>
+            <div class="result-prediction">@Model.Result.Prediction</div>
+            <div class="result-sub">Incredere: @Model.Result.Confidence.ToString("0.0")%</div>
+
+            <div class="metric-grid">
+                <div>
+                    <span class="label">Elo gazde</span>
+                    <strong>@Model.Result.HomeElo.ToString("0")</strong>
+                </div>
+                <div>
+                    <span class="label">Elo oaspeti</span>
+                    <strong>@Model.Result.AwayElo.ToString("0")</strong>
+                </div>
+                <div>
+                    <span class="label">Delta</span>
+                    <strong>@Model.Result.EloDifference.ToString("0")</strong>
+                </div>
+            </div>
+
+            <div class="probability-bars">
+                <div>
+                    <span>Victorie gazde</span>
+                    <div class="bar"><span style="width:@Model.Result.HomeWinProb%"></span></div>
+                    <small>@Model.Result.HomeWinProb.ToString("0.0")%</small>
+                </div>
+                <div>
+                    <span>Egal</span>
+                    <div class="bar"><span style="width:@Model.Result.DrawProb%"></span></div>
+                    <small>@Model.Result.DrawProb.ToString("0.0")%</small>
+                </div>
+                <div>
+                    <span>Victorie oaspeti</span>
+                    <div class="bar"><span style="width:@Model.Result.AwayWinProb%"></span></div>
+                    <small>@Model.Result.AwayWinProb.ToString("0.0")%</small>
+                </div>
+            </div>
+        }
+    </div>
+</section>

@@ -1,6 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "User Profile";
+    ViewData["Title"] = "Profil utilizator";
 }
 
-<h1>Your Profile</h1>
-<p>User: @User.Identity?.Name</p>
+<section class="card profile-card">
+    <h1 class="profile-title">Profilul tau</h1>
+    <p class="muted">Autentificat ca</p>
+    <div class="profile-name">@User.Identity?.Name</div>
+    <div class="profile-actions">
+        <a class="btn btn-outline-light" asp-controller="User" asp-action="Index">Inapoi la date</a>
+    </div>
+</section>

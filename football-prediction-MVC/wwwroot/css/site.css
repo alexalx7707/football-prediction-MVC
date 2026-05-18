@@ -1,31 +1,434 @@
-html {
-  font-size: 14px;
+:root {
+  --bg: #0c1210;
+  --surface: #151e1a;
+  --surface-2: #1b2722;
+  --accent: #53c26b;
+  --accent-2: #f4c95d;
+  --text: #f4f8f5;
+  --muted: #a7b6ad;
+  --danger: #f26f6f;
+  --shadow: rgba(0, 0, 0, 0.35);
 }
 
-@media (min-width: 768px) {
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+  min-height: 100%;
+}
+
+@media (min-width: 992px) {
   html {
     font-size: 16px;
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #1c2c25 0%, #0c1210 55%) fixed;
+  color: var(--text);
+  margin-bottom: 80px;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+a {
+  color: var(--accent);
+  text-decoration: none;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+a:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.page-shell {
+  padding-top: 2rem;
+}
+
+.site-nav {
+  background: rgba(12, 18, 16, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.navbar-brand {
+  font-family: "Bebas Neue", "Space Grotesk", sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  color: var(--text) !important;
+}
+
+.navbar .nav-link {
+  color: var(--muted);
+  font-weight: 500;
+  margin-right: 0.75rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.navbar .nav-link:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1rem 0;
+}
+
+.hero {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(120deg, rgba(83, 194, 107, 0.15), rgba(244, 201, 93, 0.08));
+  border-radius: 20px;
+  padding: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  animation: fadeUp 0.6s ease;
+}
+
+.auth-hero {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 20px;
+  background: linear-gradient(120deg, rgba(83, 194, 107, 0.18), rgba(244, 201, 93, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.auth-hero h1 {
+  font-family: "Bebas Neue", "Space Grotesk", sans-serif;
+  font-size: clamp(2.4rem, 3vw, 3.3rem);
+  margin-bottom: 0.4rem;
+}
+
+.auth-hero .lead {
+  color: var(--muted);
+}
+
+.hero h1 {
+  font-family: "Bebas Neue", "Space Grotesk", sans-serif;
+  font-size: clamp(2.6rem, 3vw, 3.6rem);
+  margin-bottom: 0.5rem;
+}
+
+.hero .lead {
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.hero-panel {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.hero-stat {
+  background: var(--surface);
+  padding: 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-stat strong {
+  display: block;
+  font-size: 1.1rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+  color: var(--accent-2);
+}
+
+.label {
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+.card-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: #1a2520;
+  border-radius: 18px;
+  padding: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  animation: fadeUp 0.6s ease;
+}
+
+.card-highlight {
+  background: linear-gradient(145deg, rgba(83, 194, 107, 0.12), rgba(21, 30, 26, 1));
+}
+
+.card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  color: var(--accent-2);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.form-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.page-header h1 {
+  font-family: "Bebas Neue", "Space Grotesk", sans-serif;
+  letter-spacing: 1px;
+}
+
+.form-label {
+  color: #d3dfd8;
+  font-weight: 600;
+}
+
+.form-control {
+  background: var(--surface-2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  padding: 0.7rem 0.9rem;
+}
+
+.form-control::placeholder {
+  color: #c1cfc7;
+  opacity: 1;
+}
+
+.form-control:focus {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(83, 194, 107, 0.2);
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0c1210;
+  font-weight: 600;
+}
+
+.btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text);
+}
+
+.btn,
+.nav-link,
+button {
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  border-width: 1px;
+}
+
+input,
+textarea,
+select {
+  cursor: text;
+}
+
+.btn-outline-light:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: var(--text);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.result-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.result-prediction {
+  font-family: "Bebas Neue", "Space Grotesk", sans-serif;
+  font-size: 2.2rem;
+  color: var(--accent-2);
+}
+
+.result-sub {
+  color: #d3dfd8;
+  margin-bottom: 1.5rem;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metric-grid strong {
+  display: block;
+  font-size: 1.1rem;
+  color: #f1f7f2;
+}
+
+.probability-bars {
+  display: grid;
+  gap: 1rem;
+}
+
+.bar {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.stat-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.stat-chip {
+  background: rgba(255, 255, 255, 0.09);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-chip span {
+  color: #d3dfd8;
+}
+
+.stat-chip strong {
+  color: #f7f2d2;
+}
+
+.table-dark th {
+  color: #f1f7f2;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.status-pill {
+  display: inline-flex;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(83, 194, 107, 0.2);
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.table-dark {
+  --bs-table-bg: transparent;
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.alert {
+  border-radius: 12px;
+}
+
+.profile-card {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.profile-title {
+  font-family: "Bebas Neue", "Space Grotesk", sans-serif;
+  color: var(--accent-2);
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.profile-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #f7f2d2;
+}
+
+.auth-card {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.auth-title {
+  font-family: "Bebas Neue", "Space Grotesk", sans-serif;
+  color: var(--accent-2);
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.auth-kicker {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.7rem;
+  color: var(--accent-2);
+}
+
+.auth-links {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.result-block {
+  margin-top: 1.5rem;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

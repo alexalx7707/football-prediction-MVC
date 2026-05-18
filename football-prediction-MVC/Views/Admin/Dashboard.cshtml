@@ -1,6 +1,77 @@
-﻿@{
-    ViewData["Title"] = "Admin Dashboard";
+﻿@model football_prediction_MVC.Models.ViewModels.AdminOpsViewModel
+
+@{
+    ViewData["Title"] = "Panou antrenare";
 }
 
-<h1>Admin Dashboard</h1>
-<p>Manage your application from here.</p>
+<section class="page-header">
+    <div>
+        <h1>Panou antrenare</h1>
+        <p class="lead">Porneste runde de antrenare si urmareste progresul.</p>
+    </div>
+    <a class="btn btn-outline-light" asp-controller="Admin" asp-action="Index">Control administrare</a>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+@if (!string.IsNullOrWhiteSpace(Model.InfoMessage))
+{
+    <div class="alert alert-success">@Model.InfoMessage</div>
+}
+
+<section class="card-grid">
+    <div class="card">
+        <h2>Start antrenare</h2>
+        <p class="muted">Configureaza sezonul de test si complexitatea modelului.</p>
+        <form asp-action="StartTraining" method="post" class="form-grid">
+            <div>
+                <label class="form-label">Sezon test</label>
+                <input class="form-control" asp-for="TrainingRequest.TestSeason" placeholder="2024/25" />
+            </div>
+            <div>
+                <label class="form-label">Estimatori XGBoost</label>
+                <input class="form-control" asp-for="TrainingRequest.NEstimators" type="number" min="50" max="1000" />
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Ruleaza antrenarea</button>
+            </div>
+        </form>
+
+        @if (Model.TrainingResult != null)
+        {
+            <div class="result-block">
+                <p>@Model.TrainingResult.Message</p>
+                <div class="metric-grid">
+                    <div>
+                        <span class="label">Acuratete RF</span>
+                        <strong>@Model.TrainingResult.AccuracyRf.ToString("0.000")</strong>
+                    </div>
+                    <div>
+                        <span class="label">Acuratete LR</span>
+                        <strong>@Model.TrainingResult.AccuracyLr.ToString("0.000")</strong>
+                    </div>
+                    <div>
+                        <span class="label">Acuratete XGB</span>
+                        <strong>@Model.TrainingResult.AccuracyXgb.ToString("0.000")</strong>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="card">
+        <h2>Status curent</h2>
+        <p class="muted">Reincarca pagina pentru actualizare.</p>
+        @if (Model.TrainingStatus == null)
+        {
+            <p class="muted">Status indisponibil.</p>
+        }
+        else
+        {
+            <div class="status-pill">@Model.TrainingStatus.Status</div>
+            <p>@Model.TrainingStatus.Message</p>
+        }
+    </div>
+</section>

@@ -1,7 +1,63 @@
-﻿@{
-    ViewData["Title"] = "Admin Panel";
+﻿@model football_prediction_MVC.Models.ViewModels.AdminOpsViewModel
+
+@{
+    ViewData["Title"] = "Control administrare";
 }
 
-<h1>Admin Panel</h1>
-<p>Welcome, Admin! Only users with the <strong>Admin</strong> role can see this page.</p>
-<a asp-controller="Admin" asp-action="Dashboard">Go to Dashboard</a>
+<section class="page-header">
+    <div>
+        <h1>Control administrare</h1>
+        <p class="lead">Gestioneaza importul dataset-ului si monitorizeaza statusul antrenarii.</p>
+    </div>
+    <a class="btn btn-outline-light" asp-controller="Admin" asp-action="Dashboard">Panou antrenare</a>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+@if (!string.IsNullOrWhiteSpace(Model.InfoMessage))
+{
+    <div class="alert alert-success">@Model.InfoMessage</div>
+}
+
+<section class="card-grid">
+    <div class="card">
+        <h2>Import dataset</h2>
+        <p class="muted">Porneste /data/import si inlocuieste colectiile MongoDB.</p>
+        <form asp-action="ImportData" method="post">
+            <button class="btn btn-primary" type="submit">Importa ultimul dataset</button>
+        </form>
+
+        @if (Model.ImportResult != null)
+        {
+            <div class="result-block">
+                <p>@Model.ImportResult.Message</p>
+                <div class="stat-grid">
+                    <div class="stat-chip">
+                        <span>Meciuri</span>
+                        <strong>@Model.ImportResult.MatchesImported</strong>
+                    </div>
+                    <div class="stat-chip">
+                        <span>Ratinguri Elo</span>
+                        <strong>@Model.ImportResult.EloRatingsImported</strong>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="card">
+        <h2>Status antrenare</h2>
+        <p class="muted">Stare live din /train/status.</p>
+        @if (Model.TrainingStatus == null)
+        {
+            <p class="muted">Status indisponibil.</p>
+        }
+        else
+        {
+            <div class="status-pill">@Model.TrainingStatus.Status</div>
+            <p>@Model.TrainingStatus.Message</p>
+        }
+    </div>
+</section>
