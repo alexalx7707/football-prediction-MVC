@@ -1,14 +1,14 @@
-﻿@model football_prediction_MVC.Models.ViewModels.PredictionPageViewModel
+@model football_prediction_MVC.Models.ViewModels.PredictionPageViewModel
 
 @{
-    ViewData["Title"] = "Predictii meciuri";
+    ViewData["Title"] = "Match predictions";
 }
 
 <section class="hero">
     <div>
-        <span class="eyebrow">Predictii Fotbal ML</span>
-        <h1>Prezice meciul inainte de fluier.</h1>
-        <p class="lead">Introdu doua echipe, foloseste contextul Elo si obtine un rezultat cu incredere estimata.</p>
+        <span class="eyebrow">Football Prediction ML</span>
+        <h1>Predict the match before kickoff.</h1>
+        <p class="lead">Enter two teams, leverage Elo context, and get a result with an estimated confidence.</p>
     </div>
     <div class="hero-panel">
         <div class="hero-stat">
@@ -16,20 +16,20 @@
             <strong>Random Forest</strong>
         </div>
         <div class="hero-stat">
-            <span class="label">Semnale</span>
-            <strong>Elo + Forma</strong>
+            <span class="label">Signals</span>
+            <strong>Elo + Form</strong>
         </div>
         <div class="hero-stat">
-            <span class="label">Mod</span>
-            <strong>API live</strong>
+            <span class="label">Mode</span>
+            <strong>Live API</strong>
         </div>
     </div>
 </section>
 
 <section class="card-grid">
     <div class="card">
-        <h2>Consola de predictii</h2>
-        <p class="muted">Foloseste endpoint-ul /predict cu echipa gazda si echipa oaspete.</p>
+        <h2>Prediction console</h2>
+        <p class="muted">Calls the /predict endpoint with the home and away teams.</p>
 
         @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
         {
@@ -38,38 +38,38 @@
 
         <form asp-action="Predict" method="post" class="form-grid">
             <div>
-                <label class="form-label">Echipa gazda</label>
-                <input class="form-control" asp-for="HomeTeam" placeholder="ex. Manchester City" />
+                <label class="form-label">Home team</label>
+                <input class="form-control" asp-for="HomeTeam" placeholder="e.g. Manchester City" />
             </div>
             <div>
-                <label class="form-label">Echipa oaspete</label>
-                <input class="form-control" asp-for="AwayTeam" placeholder="ex. Arsenal" />
+                <label class="form-label">Away team</label>
+                <input class="form-control" asp-for="AwayTeam" placeholder="e.g. Arsenal" />
             </div>
             <div class="form-actions">
-                <button class="btn btn-primary" type="submit">Ruleaza predictia</button>
+                <button class="btn btn-primary" type="submit">Run prediction</button>
             </div>
         </form>
     </div>
 
     <div class="card card-highlight">
-        <h2>Rezultat recent</h2>
+        <h2>Latest result</h2>
         @if (Model.Result == null)
         {
-            <p class="muted">Trimite un meci pentru a vedea probabilitatile si diferenta Elo.</p>
+            <p class="muted">Submit a match to see the probabilities and the Elo gap.</p>
         }
         else
         {
             <div class="result-title">@Model.Result.Match</div>
             <div class="result-prediction">@Model.Result.Prediction</div>
-            <div class="result-sub">Incredere: @Model.Result.Confidence.ToString("0.0")%</div>
+            <div class="result-sub">Confidence: @Model.Result.Confidence.ToString("0.0")%</div>
 
             <div class="metric-grid">
                 <div>
-                    <span class="label">Elo gazde</span>
+                    <span class="label">Home Elo</span>
                     <strong>@Model.Result.HomeElo.ToString("0")</strong>
                 </div>
                 <div>
-                    <span class="label">Elo oaspeti</span>
+                    <span class="label">Away Elo</span>
                     <strong>@Model.Result.AwayElo.ToString("0")</strong>
                 </div>
                 <div>
@@ -80,17 +80,17 @@
 
             <div class="probability-bars">
                 <div>
-                    <span>Victorie gazde</span>
+                    <span>Home win</span>
                     <div class="bar"><span style="width:@Model.Result.HomeWinProb%"></span></div>
                     <small>@Model.Result.HomeWinProb.ToString("0.0")%</small>
                 </div>
                 <div>
-                    <span>Egal</span>
+                    <span>Draw</span>
                     <div class="bar"><span style="width:@Model.Result.DrawProb%"></span></div>
                     <small>@Model.Result.DrawProb.ToString("0.0")%</small>
                 </div>
                 <div>
-                    <span>Victorie oaspeti</span>
+                    <span>Away win</span>
                     <div class="bar"><span style="width:@Model.Result.AwayWinProb%"></span></div>
                     <small>@Model.Result.AwayWinProb.ToString("0.0")%</small>
                 </div>

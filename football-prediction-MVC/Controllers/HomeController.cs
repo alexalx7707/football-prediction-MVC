@@ -29,7 +29,7 @@ namespace football_prediction_MVC.Controllers
         {
             if (string.IsNullOrWhiteSpace(model.HomeTeam) || string.IsNullOrWhiteSpace(model.AwayTeam))
             {
-                model.ErrorMessage = "Completeaza ambele echipe inainte de trimitere.";
+                model.ErrorMessage = "Fill in both teams before submitting.";
                 return View("Index", model);
             }
 
@@ -46,7 +46,7 @@ namespace football_prediction_MVC.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Prediction failed");
-                model.ErrorMessage = "Predictia a esuat. Verifica API-ul si incearca din nou.";
+                model.ErrorMessage = "Prediction failed. Check the API and try again.";
             }
 
             return View("Index", model);

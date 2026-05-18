@@ -30,7 +30,7 @@ public class LoginModel : PageModel
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Parola")]
+        [Display(Name = "Password")]
         public string Password { get; set; } = "";
     }
 
@@ -56,7 +56,7 @@ public class LoginModel : PageModel
             return LocalRedirect(returnUrl);
         }
 
-        ModelState.AddModelError(string.Empty, "Autentificare esuata. Verifica emailul si parola.");
+        ModelState.AddModelError(string.Empty, "Login failed. Check your email and password.");
         return Page();
     }
 }

@@ -1,15 +1,15 @@
-﻿@model football_prediction_MVC.Models.ViewModels.AdminOpsViewModel
+@model football_prediction_MVC.Models.ViewModels.AdminOpsViewModel
 
 @{
-    ViewData["Title"] = "Control administrare";
+    ViewData["Title"] = "Admin control";
 }
 
 <section class="page-header">
     <div>
-        <h1>Control administrare</h1>
-        <p class="lead">Gestioneaza importul dataset-ului si monitorizeaza statusul antrenarii.</p>
+        <h1>Admin control</h1>
+        <p class="lead">Manage dataset imports and monitor training status.</p>
     </div>
-    <a class="btn btn-outline-light" asp-controller="Admin" asp-action="Dashboard">Panou antrenare</a>
+    <a class="btn btn-outline-light" asp-controller="Admin" asp-action="Dashboard">Training dashboard</a>
 </section>
 
 @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
@@ -24,9 +24,9 @@
 <section class="card-grid">
     <div class="card">
         <h2>Import dataset</h2>
-        <p class="muted">Porneste /data/import si inlocuieste colectiile MongoDB.</p>
+        <p class="muted">Triggers /data/import and replaces the MongoDB collections.</p>
         <form asp-action="ImportData" method="post">
-            <button class="btn btn-primary" type="submit">Importa ultimul dataset</button>
+            <button class="btn btn-primary" type="submit">Import latest dataset</button>
         </form>
 
         @if (Model.ImportResult != null)
@@ -35,11 +35,11 @@
                 <p>@Model.ImportResult.Message</p>
                 <div class="stat-grid">
                     <div class="stat-chip">
-                        <span>Meciuri</span>
+                        <span>Matches</span>
                         <strong>@Model.ImportResult.MatchesImported</strong>
                     </div>
                     <div class="stat-chip">
-                        <span>Ratinguri Elo</span>
+                        <span>Elo ratings</span>
                         <strong>@Model.ImportResult.EloRatingsImported</strong>
                     </div>
                 </div>
@@ -48,11 +48,11 @@
     </div>
 
     <div class="card">
-        <h2>Status antrenare</h2>
-        <p class="muted">Stare live din /train/status.</p>
+        <h2>Training status</h2>
+        <p class="muted">Live state from /train/status.</p>
         @if (Model.TrainingStatus == null)
         {
-            <p class="muted">Status indisponibil.</p>
+            <p class="muted">Status unavailable.</p>
         }
         else
         {

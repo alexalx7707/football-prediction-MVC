@@ -24,7 +24,7 @@ public class UserController : Controller
         }
         catch
         {
-            model.ErrorMessage = "Nu pot incarca statisticile. Verifica daca API-ul ruleaza.";
+            model.ErrorMessage = "Could not load the statistics. Make sure the API is running.";
         }
 
         return View(model);
@@ -46,11 +46,11 @@ public class UserController : Controller
             var matches = await _dataService.GetMatchesAsync(model.MatchQuery, cancellationToken);
             model.MatchFetchedCount = matches.Count;
             model.Matches = matches.Skip((model.MatchPage - 1) * model.MatchPageSize).Take(model.MatchPageSize).ToList();
-            model.InfoMessage = $"Am incarcat {model.Matches.Count} meciuri (pagina {model.MatchPage}).";
+            model.InfoMessage = $"Loaded {model.Matches.Count} matches (page {model.MatchPage}).";
         }
         catch
         {
-            model.ErrorMessage = "Cautarea meciurilor a esuat. Verifica API-ul si filtrele.";
+            model.ErrorMessage = "Match search failed. Check the API and the filters.";
         }
 
         return View("Index", model);
@@ -72,11 +72,11 @@ public class UserController : Controller
             var ratings = await _dataService.GetEloRatingsAsync(model.EloQuery, cancellationToken);
             model.EloFetchedCount = ratings.Count;
             model.EloRatings = ratings.Skip((model.EloPage - 1) * model.EloPageSize).Take(model.EloPageSize).ToList();
-            model.InfoMessage = $"Am incarcat {model.EloRatings.Count} randuri Elo (pagina {model.EloPage}).";
+            model.InfoMessage = $"Loaded {model.EloRatings.Count} Elo rows (page {model.EloPage}).";
         }
         catch
         {
-            model.ErrorMessage = "Cautarea Elo a esuat. Verifica API-ul si filtrele.";
+            model.ErrorMessage = "Elo search failed. Check the API and the filters.";
         }
 
         return View("Index", model);

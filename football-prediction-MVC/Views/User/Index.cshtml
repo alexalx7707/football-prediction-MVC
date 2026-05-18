@@ -1,16 +1,16 @@
-﻿@model football_prediction_MVC.Models.ViewModels.UserDataViewModel
+@model football_prediction_MVC.Models.ViewModels.UserDataViewModel
 @using System.Linq
 
 @{
-    ViewData["Title"] = "Explorare date";
+    ViewData["Title"] = "Data Explorer";
 }
 
 <section class="page-header">
     <div>
-        <h1>Explorare date</h1>
-        <p class="lead">Interogheaza meciuri si ratinguri Elo direct din API.</p>
+        <h1>Data Explorer</h1>
+        <p class="lead">Query matches and Elo ratings directly from the API.</p>
     </div>
-    <a class="btn btn-outline-light" asp-controller="User" asp-action="Profile">Profil</a>
+    <a class="btn btn-outline-light" asp-controller="User" asp-action="Profile">Profile</a>
 </section>
 
 @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
@@ -24,8 +24,8 @@
 
 <section class="card-grid">
     <div class="card">
-        <h2>Statistici dataset</h2>
-        <p class="muted">Numarul de documente din /data/stats.</p>
+        <h2>Dataset statistics</h2>
+        <p class="muted">Document counts from /data/stats.</p>
         @if (Model.Stats?.Collections?.Count > 0)
         {
             <div class="stat-grid">
@@ -40,50 +40,50 @@
         }
         else
         {
-            <p class="muted">Nu exista statistici disponibile.</p>
+            <p class="muted">No statistics available.</p>
         }
     </div>
 
     <div class="card">
-        <h2>Interogare meciuri</h2>
-        <p class="muted">Cauta dupa echipa gazda, echipa oaspete si sezon.</p>
+        <h2>Match search</h2>
+        <p class="muted">Filter by home team, away team and season.</p>
         <form asp-action="SearchMatches" method="post" class="form-grid">
             <div>
-                <label class="form-label">Echipa gazda</label>
-                <input class="form-control" asp-for="MatchQuery.HomeTeam" placeholder="Oricare" />
+                <label class="form-label">Home team</label>
+                <input class="form-control" asp-for="MatchQuery.HomeTeam" placeholder="Any" />
             </div>
             <div>
-                <label class="form-label">Echipa oaspete</label>
-                <input class="form-control" asp-for="MatchQuery.AwayTeam" placeholder="Oricare" />
+                <label class="form-label">Away team</label>
+                <input class="form-control" asp-for="MatchQuery.AwayTeam" placeholder="Any" />
             </div>
             <div>
-                <label class="form-label">Data inceput</label>
+                <label class="form-label">Start date</label>
                 <input class="form-control" asp-for="MatchQuery.DateFrom" type="date" />
             </div>
             <div>
-                <label class="form-label">Data sfarsit</label>
+                <label class="form-label">End date</label>
                 <input class="form-control" asp-for="MatchQuery.DateTo" type="date" />
             </div>
             <div>
-                <label class="form-label">Dimensiune pagina</label>
+                <label class="form-label">Page size</label>
                 <input class="form-control" asp-for="MatchPageSize" type="number" min="10" max="200" />
             </div>
             <div>
-                <label class="form-label">Pagina</label>
+                <label class="form-label">Page</label>
                 <input class="form-control" asp-for="MatchPage" type="number" min="1" />
             </div>
             <div class="form-actions">
-                <button class="btn btn-primary" type="submit">Cauta meciuri</button>
+                <button class="btn btn-primary" type="submit">Search matches</button>
             </div>
         </form>
     </div>
 </section>
 
 <section class="card">
-    <h2>Rezultate meciuri</h2>
+    <h2>Match results</h2>
     @if (Model.Matches.Count == 0)
     {
-        <p class="muted">Nu exista rezultate pentru meciuri.</p>
+        <p class="muted">No match results.</p>
     }
     else
     {
@@ -121,9 +121,9 @@
                 <input type="hidden" name="MatchQuery.DateTo" value="@Model.MatchQuery.DateTo" />
                 <input type="hidden" name="MatchPageSize" value="@Model.MatchPageSize" />
                 <input type="hidden" name="MatchPage" value="@(Model.MatchPage - 1)" />
-                <button class="btn btn-outline-light" type="submit" @(matchCanPrev ? null : "disabled")>Inapoi</button>
+                <button class="btn btn-outline-light" type="submit" @(matchCanPrev ? null : "disabled")>Previous</button>
             </form>
-            <span class="muted">Pagina @Model.MatchPage</span>
+            <span class="muted">Page @Model.MatchPage</span>
             <form asp-action="SearchMatches" method="post">
                 <input type="hidden" name="MatchQuery.HomeTeam" value="@Model.MatchQuery.HomeTeam" />
                 <input type="hidden" name="MatchQuery.AwayTeam" value="@Model.MatchQuery.AwayTeam" />
@@ -131,7 +131,7 @@
                 <input type="hidden" name="MatchQuery.DateTo" value="@Model.MatchQuery.DateTo" />
                 <input type="hidden" name="MatchPageSize" value="@Model.MatchPageSize" />
                 <input type="hidden" name="MatchPage" value="@(Model.MatchPage + 1)" />
-                <button class="btn btn-outline-light" type="submit" @(matchCanNext ? null : "disabled")>Urmator</button>
+                <button class="btn btn-outline-light" type="submit" @(matchCanNext ? null : "disabled")>Next</button>
             </form>
         </div>
     }
@@ -139,31 +139,31 @@
 
 <section class="card-grid">
     <div class="card">
-        <h2>Interogare Elo</h2>
-        <p class="muted">Filtreaza dupa club si limiteaza rezultatele.</p>
+        <h2>Elo search</h2>
+        <p class="muted">Filter by club and limit the results.</p>
         <form asp-action="SearchElo" method="post" class="form-grid">
             <div>
                 <label class="form-label">Club</label>
-                <input class="form-control" asp-for="EloQuery.Club" placeholder="ex. Barcelona" />
+                <input class="form-control" asp-for="EloQuery.Club" placeholder="e.g. Barcelona" />
             </div>
             <div>
-                <label class="form-label">Dimensiune pagina</label>
+                <label class="form-label">Page size</label>
                 <input class="form-control" asp-for="EloPageSize" type="number" min="10" max="200" />
             </div>
             <div>
-                <label class="form-label">Pagina</label>
+                <label class="form-label">Page</label>
                 <input class="form-control" asp-for="EloPage" type="number" min="1" />
             </div>
             <div class="form-actions">
-                <button class="btn btn-primary" type="submit">Cauta Elo</button>
+                <button class="btn btn-primary" type="submit">Search Elo</button>
             </div>
         </form>
     </div>
     <div class="card">
-        <h2>Rezultate Elo</h2>
+        <h2>Elo results</h2>
         @if (Model.EloRatings.Count == 0)
         {
-            <p class="muted">Nu exista rezultate Elo.</p>
+            <p class="muted">No Elo results.</p>
         }
         else
         {
@@ -198,14 +198,14 @@
                     <input type="hidden" name="EloQuery.Club" value="@Model.EloQuery.Club" />
                     <input type="hidden" name="EloPageSize" value="@Model.EloPageSize" />
                     <input type="hidden" name="EloPage" value="@(Model.EloPage - 1)" />
-                    <button class="btn btn-outline-light" type="submit" @(eloCanPrev ? null : "disabled")>Inapoi</button>
+                    <button class="btn btn-outline-light" type="submit" @(eloCanPrev ? null : "disabled")>Previous</button>
                 </form>
-                <span class="muted">Pagina @Model.EloPage</span>
+                <span class="muted">Page @Model.EloPage</span>
                 <form asp-action="SearchElo" method="post">
                     <input type="hidden" name="EloQuery.Club" value="@Model.EloQuery.Club" />
                     <input type="hidden" name="EloPageSize" value="@Model.EloPageSize" />
                     <input type="hidden" name="EloPage" value="@(Model.EloPage + 1)" />
-                    <button class="btn btn-outline-light" type="submit" @(eloCanNext ? null : "disabled")>Urmator</button>
+                    <button class="btn btn-outline-light" type="submit" @(eloCanNext ? null : "disabled")>Next</button>
                 </form>
             </div>
         }

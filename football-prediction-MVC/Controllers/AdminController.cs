@@ -26,7 +26,7 @@ public class AdminController : Controller
         }
         catch
         {
-            model.ErrorMessage = "Nu pot incarca statusul antrenarii. Verifica daca API-ul ruleaza.";
+            model.ErrorMessage = "Could not load the training status. Make sure the API is running.";
         }
 
         return View(model);
@@ -43,7 +43,7 @@ public class AdminController : Controller
         }
         catch
         {
-            model.ErrorMessage = "Importul dataset-ului a esuat. Verifica accesul Kaggle si API-ul.";
+            model.ErrorMessage = "Dataset import failed. Check Kaggle access and the API.";
         }
 
         return View("Index", model);
@@ -58,7 +58,7 @@ public class AdminController : Controller
         }
         catch
         {
-            model.ErrorMessage = "Nu pot incarca statusul antrenarii. Verifica daca API-ul ruleaza.";
+            model.ErrorMessage = "Could not load the training status. Make sure the API is running.";
         }
 
         return View(model);
@@ -76,7 +76,7 @@ public class AdminController : Controller
         }
         catch
         {
-            model.ErrorMessage = "Antrenarea nu a pornit. Verifica API-ul si parametrii.";
+            model.ErrorMessage = "Training did not start. Check the API and the parameters.";
         }
 
         return View("Dashboard", model);

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,7 +16,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm site-nav">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Predictii Fotbal ML</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Football Prediction ML</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,23 +24,23 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Predictie</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Prediction</a>
                         </li>
                         @if (User.Identity != null && User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="User" asp-action="Index">Explorare date</a>
+                                <a class="nav-link" asp-controller="User" asp-action="Index">Data Explorer</a>
                             </li>
 
                             @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Admin" asp-action="Index">Administrare</a>
+                                    <a class="nav-link" asp-controller="Admin" asp-action="Index">Administration</a>
                                 </li>
                             }
                         }
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Confidentialitate</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -56,7 +56,7 @@
 
     <footer class="footer text-muted">
         <div class="container">
-            &copy; 2026 - football_prediction_MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Confidentialitate</a>
+            &copy; 2026 - football_prediction_MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
