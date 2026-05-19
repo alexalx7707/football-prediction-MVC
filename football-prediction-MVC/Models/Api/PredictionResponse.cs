@@ -39,4 +39,37 @@ public class PredictionResponse
 
     [JsonPropertyName("away_win_prob")]
     public double AwayWinProb { get; set; }
+
+    [JsonPropertyName("reasoning")]
+    public PredictionReasoning? Reasoning { get; set; }
+}
+
+public class PredictionReasoning
+{
+    [JsonPropertyName("summary")]
+    public string Summary { get; set; } = string.Empty;
+
+    [JsonPropertyName("factors")]
+    public List<PredictionFactor> Factors { get; set; } = new();
+}
+
+public class PredictionFactor
+{
+    [JsonPropertyName("id")]
+    public string Id { get; set; } = string.Empty;
+
+    [JsonPropertyName("label")]
+    public string Label { get; set; } = string.Empty;
+
+    [JsonPropertyName("home_value")]
+    public double HomeValue { get; set; }
+
+    [JsonPropertyName("away_value")]
+    public double AwayValue { get; set; }
+
+    [JsonPropertyName("favors")]
+    public string Favors { get; set; } = string.Empty;
+
+    [JsonPropertyName("description")]
+    public string Description { get; set; } = string.Empty;
 }

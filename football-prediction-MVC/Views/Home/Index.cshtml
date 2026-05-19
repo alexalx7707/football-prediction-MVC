@@ -98,3 +98,60 @@
         }
     </div>
 </section>
+
+@if (Model.Result?.Reasoning != null)
+{
+    var reasoning = Model.Result.Reasoning;
+    var homeName = Model.Result.HomeTeam;
+    var awayName = Model.Result.AwayTeam;
+
+    <section class="card reasoning-card">
+        <h2>Why this prediction</h2>
+        @if (!string.IsNullOrWhiteSpace(reasoning.Summary))
+        {
+            <p class="reasoning-summary">@reasoning.Summary</p>
+        }
+
+        @if (reasoning.Factors.Count > 0)
+        {
+            <div class="factor-grid">
+                @foreach (var factor in reasoning.Factors)
+                {
+                    var favorClass = factor.Favors?.ToLowerInvariant() switch
+                    {
+                        "home" => "favors-home",
+                        "away" => "favors-away",
+                        _ => "favors-none"
+                    };
+                    var favorLabel = factor.Favors?.ToLowerInvariant() switch
+                    {
+                        "home" => $"Favors {homeName}",
+                        "away" => $"Favors {awayName}",
+                        _ => "Even"
+                    };
+
+                    <div class="factor @favorClass">
+                        <div class="factor-head">
+                            <span class="factor-label">@factor.Label</span>
+                            <span class="factor-badge">@favorLabel</span>
+                        </div>
+                        <div class="factor-values">
+                            <div>
+                                <span class="label">@homeName</span>
+                                <strong>@factor.HomeValue.ToString("0.##")</strong>
+                            </div>
+                            <div>
+                                <span class="label">@awayName</span>
+                                <strong>@factor.AwayValue.ToString("0.##")</strong>
+                            </div>
+                        </div>
+                        @if (!string.IsNullOrWhiteSpace(factor.Description))
+                        {
+                            <p class="factor-desc">@factor.Description</p>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </section>
+}

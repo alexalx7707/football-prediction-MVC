@@ -278,6 +278,7 @@ select {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  color: #fff;
 }
 
 .result-prediction {
@@ -467,6 +468,116 @@ select {
 
 .result-block {
   margin-top: 1.5rem;
+}
+
+.reasoning-card {
+  margin-top: 0.5rem;
+}
+
+.reasoning-summary {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: #f1f7f2;
+  background: rgba(83, 194, 107, 0.08);
+  border-left: 3px solid var(--accent);
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.factor-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.factor {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.factor.favors-home {
+  border-left: 3px solid var(--accent);
+}
+
+.factor.favors-away {
+  border-left: 3px solid var(--accent-2);
+}
+
+.factor.favors-none {
+  border-left: 3px solid rgba(255, 255, 255, 0.25);
+}
+
+.factor-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.factor-label {
+  font-weight: 600;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.factor-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  white-space: nowrap;
+}
+
+.factor.favors-home .factor-badge {
+  background: rgba(83, 194, 107, 0.18);
+  color: var(--accent);
+}
+
+.factor.favors-away .factor-badge {
+  background: rgba(244, 201, 93, 0.18);
+  color: var(--accent-2);
+}
+
+.factor-values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.factor-values > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.factor-values strong {
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.factor-values .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 500;
+}
+
+.factor-desc {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.45;
 }
 
 @keyframes fadeUp {
