@@ -423,6 +423,37 @@ select {
   justify-content: flex-start;
 }
 
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.auth-field .form-label {
+  margin-bottom: 0;
+}
+
+.auth-field .text-danger {
+  font-size: 0.85rem;
+  min-height: 1rem;
+}
+
+.auth-submit {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1rem;
+}
+
+.auth-link {
+  margin-top: 0.5rem;
+  display: inline-block;
+}
+
 .result-block {
   margin-top: 1.5rem;
 }
