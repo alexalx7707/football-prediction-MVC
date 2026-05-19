@@ -155,9 +155,20 @@ a:hover {
 
 .card-grid {
   display: grid;
-  gap: 1.5rem;
+  gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.card-grid + .card-grid,
+.card-grid + section.card,
+section.card + .card-grid,
+section.card + section.card {
+  margin-top: 0.5rem;
+}
+
+section.card {
+  margin-bottom: 2.5rem;
 }
 
 .card {
