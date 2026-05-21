@@ -22,6 +22,23 @@
     <div class="alert alert-success">@Model.InfoMessage</div>
 }
 
+<section class="card fun-fact-card">
+    <h2>Football fun fact</h2>
+    <p class="muted">Press the button for a random fact. The same fact won't repeat for 2 days.</p>
+    <form asp-action="ShowFunFact" method="post" class="fun-fact-form">
+        @Html.AntiForgeryToken()
+        <button class="btn btn-primary" type="submit">Surprise me</button>
+    </form>
+    @if (Model.CurrentFunFact != null)
+    {
+        <p class="fun-fact-text">@Model.CurrentFunFact.Text</p>
+        @if (Model.AllFactsSeen)
+        {
+            <p class="fun-fact-note muted">You've seen every fact in the last 2 days — showing the oldest one again.</p>
+        }
+    }
+</section>
+
 <section class="card-grid">
     <div class="card">
         <h2>Dataset statistics</h2>

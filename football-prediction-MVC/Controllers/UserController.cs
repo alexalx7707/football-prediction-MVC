@@ -1,6 +1,7 @@
-﻿using football_prediction_MVC.Models.ViewModels;
+using football_prediction_MVC.Models.ViewModels;
 using football_prediction_MVC.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace football_prediction_MVC.Controllers;
@@ -9,24 +10,22 @@ namespace football_prediction_MVC.Controllers;
 public class UserController : Controller
 {
     private readonly IDataService _dataService;
+    private readonly IFunFactService _funFactService;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public UserController(IDataService dataService)
+    public UserController(
+        IDataService dataService,
+        IFunFactService funFactService,
+        UserManager<IdentityUser> userManager)
     {
         _dataService = dataService;
+        _funFactService = funFactService;
+        _userManager = userManager;
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
-        var model = new UserDataViewModel();
-        try
-        {
-            model.Stats = await _dataService.GetStatsAsync(cancellationToken);
-        }
-        catch
-        {
-            model.ErrorMessage = "Could not load the statistics. Make sure the API is running.";
-        }
-
+        var model = await BuildBaseViewModelAsync(cancellationToken);
         return View(model);
     }
 
@@ -82,8 +81,54 @@ public class UserController : Controller
         return View("Index", model);
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ShowFunFact(CancellationToken cancellationToken)
+    {
+        var model = await BuildBaseViewModelAsync(cancellationToken);
+
+        var userId = _userManager.GetUserId(User);
+        if (string.IsNullOrEmpty(userId))
+        {
+            model.ErrorMessage = "Could not identify the current user.";
+            return View("Index", model);
+        }
+
+        try
+        {
+            var (fact, allSeen) = await _funFactService.GetNextForUserAsync(userId, cancellationToken);
+            model.CurrentFunFact = fact;
+            model.AllFactsSeen = allSeen;
+
+            if (fact is null)
+            {
+                model.ErrorMessage = "No fun facts are configured yet.";
+            }
+        }
+        catch
+        {
+            model.ErrorMessage = "Could not load a fun fact. Try again in a moment.";
+        }
+
+        return View("Index", model);
+    }
+
     public IActionResult Profile()
     {
         return View();
+    }
+
+    private async Task<UserDataViewModel> BuildBaseViewModelAsync(CancellationToken cancellationToken)
+    {
+        var model = new UserDataViewModel();
+        try
+        {
+            model.Stats = await _dataService.GetStatsAsync(cancellationToken);
+        }
+        catch
+        {
+            model.ErrorMessage = "Could not load the statistics. Make sure the API is running.";
+        }
+        return model;
     }
 }

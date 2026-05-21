@@ -24,4 +24,8 @@
 	  <Folder Include="Areas\Identity\Pages\Shared\" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Content Update="Data\funfacts.json" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
 </Project>

@@ -38,6 +38,9 @@ builder.Services.AddHttpClient<ITrainingService, TrainingService>((serviceProvid
     client.ConfigureApiClient(serviceProvider.GetRequiredService<IConfiguration>());
 });
 
+builder.Services.AddSingleton<IFunFactRepository, FunFactRepository>();
+builder.Services.AddScoped<IFunFactService, FunFactService>();
+
 // Authorization policies
 builder.Services.AddAuthorization(options =>
 {
