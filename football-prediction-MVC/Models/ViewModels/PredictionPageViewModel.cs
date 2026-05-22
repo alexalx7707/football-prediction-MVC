@@ -8,4 +8,5 @@ public class PredictionPageViewModel
     public string? AwayTeam { get; set; }
     public PredictionResponse? Result { get; set; }
     public string? ErrorMessage { get; set; }
+    public DataStatsResponse? Stats { get; set; }
 }

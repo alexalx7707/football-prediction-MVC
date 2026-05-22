@@ -11,18 +11,48 @@
         <p class="lead">Enter two teams, leverage Elo context, and get a result with an estimated confidence.</p>
     </div>
     <div class="hero-panel">
-        <div class="hero-stat">
-            <span class="label">Model</span>
-            <strong>Random Forest</strong>
-        </div>
-        <div class="hero-stat">
-            <span class="label">Signals</span>
-            <strong>Elo + Form</strong>
-        </div>
-        <div class="hero-stat">
-            <span class="label">Mode</span>
-            <strong>Live API</strong>
-        </div>
+        @{
+            string Humanize(string raw) =>
+                System.Globalization.CultureInfo.CurrentCulture.TextInfo
+                    .ToTitleCase(raw.Replace('_', ' ').Replace('-', ' '));
+            var topCollections = Model.Stats?.Collections
+                .OrderByDescending(c => c.DocumentCount)
+                .Take(3)
+                .ToList() ?? new List<football_prediction_MVC.Models.Api.CollectionStats>();
+            var totalDocs = Model.Stats?.Collections.Sum(c => (long)c.DocumentCount) ?? 0;
+        }
+        @if (topCollections.Count == 0)
+        {
+            <div class="hero-stat">
+                <span class="label">Dataset</span>
+                <strong>Loading&hellip;</strong>
+            </div>
+            <div class="hero-stat">
+                <span class="label">Collections</span>
+                <strong>&mdash;</strong>
+            </div>
+            <div class="hero-stat">
+                <span class="label">Status</span>
+                <strong>API offline</strong>
+            </div>
+        }
+        else
+        {
+            foreach (var collection in topCollections)
+            {
+                <div class="hero-stat">
+                    <span class="label">@Humanize(collection.Collection)</span>
+                    <strong>@collection.DocumentCount.ToString("N0")</strong>
+                </div>
+            }
+            if (topCollections.Count < 3)
+            {
+                <div class="hero-stat">
+                    <span class="label">Total records</span>
+                    <strong>@totalDocs.ToString("N0")</strong>
+                </div>
+            }
+        }
     </div>
 </section>
 
