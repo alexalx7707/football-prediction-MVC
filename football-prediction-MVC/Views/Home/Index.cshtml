@@ -69,16 +69,26 @@
         <form asp-action="Predict" method="post" class="form-grid">
             <div>
                 <label class="form-label">Home team</label>
-                <input class="form-control" asp-for="HomeTeam" placeholder="e.g. Manchester City" />
+                <input class="form-control" asp-for="HomeTeam" list="team-options" autocomplete="off" placeholder="Start typing a team name" />
             </div>
             <div>
                 <label class="form-label">Away team</label>
-                <input class="form-control" asp-for="AwayTeam" placeholder="e.g. Arsenal" />
+                <input class="form-control" asp-for="AwayTeam" list="team-options" autocomplete="off" placeholder="Start typing a team name" />
             </div>
             <div class="form-actions">
                 <button class="btn btn-primary" type="submit">Run prediction</button>
             </div>
         </form>
+
+        @if (Model.Teams.Count > 0)
+        {
+            <datalist id="team-options">
+                @foreach (var team in Model.Teams)
+                {
+                    <option value="@team"></option>
+                }
+            </datalist>
+        }
     </div>
 
     <div class="card card-highlight">

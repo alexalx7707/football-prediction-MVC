@@ -24,6 +24,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
 // MVC
 builder.Services.AddControllersWithViews();
+builder.Services.AddMemoryCache();
 
 builder.Services.AddHttpClient<IPredictionService, PredictionService>((serviceProvider, client) =>
 {

@@ -38,6 +38,23 @@ public class DataService : IDataService
         return await ReadOrThrowAsync<List<Dictionary<string, JsonElement>>>(response, cancellationToken);
     }
 
+    public async Task<List<string>> GetTeamsAsync(CancellationToken cancellationToken = default)
+    {
+        var response = await _client.GetAsync("data/teams", cancellationToken);
+        if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            return new List<string>();
+        }
+
+        var payload = await ReadOrThrowAsync<TeamsResponse>(response, cancellationToken);
+        return payload.Teams
+            .Where(t => !string.IsNullOrWhiteSpace(t))
+            .Select(t => t.Trim())
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(t => t, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+    }
+
     private async Task<T> ReadOrThrowAsync<T>(HttpResponseMessage response, CancellationToken cancellationToken)
     {
         var content = await response.Content.ReadAsStringAsync(cancellationToken);

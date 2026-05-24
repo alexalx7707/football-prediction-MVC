@@ -9,4 +9,5 @@ public class PredictionPageViewModel
     public PredictionResponse? Result { get; set; }
     public string? ErrorMessage { get; set; }
     public DataStatsResponse? Stats { get; set; }
+    public List<string> Teams { get; set; } = new();
 }

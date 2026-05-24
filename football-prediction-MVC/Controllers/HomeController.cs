@@ -4,29 +4,37 @@ using football_prediction_MVC.Models.Api;
 using football_prediction_MVC.Models.ViewModels;
 using football_prediction_MVC.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace football_prediction_MVC.Controllers
 {
     public class HomeController : Controller
     {
+        private const string TeamsCacheKey = "home.teams";
+        private static readonly TimeSpan TeamsCacheTtl = TimeSpan.FromHours(1);
+
         private readonly ILogger<HomeController> _logger;
         private readonly IPredictionService _predictionService;
         private readonly IDataService _dataService;
+        private readonly IMemoryCache _cache;
 
         public HomeController(
             ILogger<HomeController> logger,
             IPredictionService predictionService,
-            IDataService dataService)
+            IDataService dataService,
+            IMemoryCache cache)
         {
             _logger = logger;
             _predictionService = predictionService;
             _dataService = dataService;
+            _cache = cache;
         }
 
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
             var model = new PredictionPageViewModel();
             await PopulateStatsAsync(model, cancellationToken);
+            await PopulateTeamsAsync(model, cancellationToken);
             return View(model);
         }
 
@@ -35,6 +43,7 @@ namespace football_prediction_MVC.Controllers
         public async Task<IActionResult> Predict(PredictionPageViewModel model, CancellationToken cancellationToken)
         {
             await PopulateStatsAsync(model, cancellationToken);
+            await PopulateTeamsAsync(model, cancellationToken);
 
             if (string.IsNullOrWhiteSpace(model.HomeTeam) || string.IsNullOrWhiteSpace(model.AwayTeam))
             {
@@ -81,6 +90,29 @@ namespace football_prediction_MVC.Controllers
             catch (Exception ex)
             {
                 _logger.LogWarning(ex, "Failed to load dataset stats for hero panel");
+            }
+        }
+
+        private async Task PopulateTeamsAsync(PredictionPageViewModel model, CancellationToken cancellationToken)
+        {
+            try
+            {
+                if (_cache.TryGetValue(TeamsCacheKey, out List<string>? cached) && cached is not null)
+                {
+                    model.Teams = cached;
+                    return;
+                }
+
+                var teams = await _dataService.GetTeamsAsync(cancellationToken);
+                if (teams.Count > 0)
+                {
+                    _cache.Set(TeamsCacheKey, teams, TeamsCacheTtl);
+                }
+                model.Teams = teams;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Failed to load team list for prediction console");
             }
         }
     }
