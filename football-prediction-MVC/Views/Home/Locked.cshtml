@@ -1,0 +1,71 @@
+@{
+    ViewData["Title"] = "Unlock the Data Explorer";
+}
+
+<section class="locked-hero">
+    <span class="eyebrow">Members only</span>
+    <h1>You're one free account away from the full toolkit.</h1>
+    <p class="lead">
+        The prediction console is just the start. Create a free account to unlock everything below &mdash;
+        it takes less than a minute.
+    </p>
+    <div class="locked-cta">
+        <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register">Create free account</a>
+        <a class="btn btn-outline-light btn-lg" asp-area="Identity" asp-page="/Account/Login">I already have one</a>
+    </div>
+</section>
+
+<section class="card-grid locked-grid">
+    <div class="card locked-card">
+        <span class="lock-badge" aria-hidden="true">🔒</span>
+        <div class="locked-preview" aria-hidden="true">
+            <h2>Match search</h2>
+            <p class="muted">Filter by home team, away team and season.</p>
+            <div class="locked-rows">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="locked-tag">Search thousands of historical matches</div>
+    </div>
+
+    <div class="card locked-card">
+        <span class="lock-badge" aria-hidden="true">🔒</span>
+        <div class="locked-preview" aria-hidden="true">
+            <h2>Elo ratings</h2>
+            <p class="muted">Track club strength over time.</p>
+            <div class="locked-rows">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="locked-tag">Live Elo for every club in the dataset</div>
+    </div>
+
+    <div class="card locked-card">
+        <span class="lock-badge" aria-hidden="true">🔒</span>
+        <div class="locked-preview" aria-hidden="true">
+            <h2>Daily fun facts</h2>
+            <p class="muted">A fresh football fact on tap.</p>
+            <div class="locked-rows">
+                <span></span><span></span>
+            </div>
+        </div>
+        <div class="locked-tag">1,000 facts, never the same one twice in a row</div>
+    </div>
+
+    <div class="card locked-card">
+        <span class="lock-badge" aria-hidden="true">🔒</span>
+        <div class="locked-preview" aria-hidden="true">
+            <h2>Dataset statistics</h2>
+            <p class="muted">Live document counts across collections.</p>
+            <div class="locked-rows">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="locked-tag">See the full data behind every prediction</div>
+    </div>
+</section>
+
+<section class="locked-footer-cta">
+    <h2>Ready to dig in?</h2>
+    <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register">Create your free account</a>
+</section>

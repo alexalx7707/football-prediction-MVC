@@ -19,7 +19,6 @@
                 .OrderByDescending(c => c.DocumentCount)
                 .Take(3)
                 .ToList() ?? new List<football_prediction_MVC.Models.Api.CollectionStats>();
-            var totalDocs = Model.Stats?.Collections.Sum(c => (long)c.DocumentCount) ?? 0;
         }
         @if (topCollections.Count == 0)
         {
@@ -45,16 +44,29 @@
                     <strong>@collection.DocumentCount.ToString("N0")</strong>
                 </div>
             }
-            if (topCollections.Count < 3)
-            {
-                <div class="hero-stat">
-                    <span class="label">Total records</span>
-                    <strong>@totalDocs.ToString("N0")</strong>
-                </div>
-            }
         }
+        <button type="button" class="hero-stat hero-stat-action" id="quick-match"
+                data-home="Man City" data-away="Arsenal">
+            <span class="label">Try an example</span>
+            <strong>Man City vs Arsenal</strong>
+        </button>
     </div>
 </section>
+
+@if (User.Identity?.IsAuthenticated != true)
+{
+    <section class="fomo-banner">
+        <div class="fomo-text">
+            <span class="eyebrow">Free preview</span>
+            <h2>You're seeing the public console.</h2>
+            <p>Create a free account to unlock the Data Explorer, live Elo search and daily fun facts.</p>
+        </div>
+        <div class="fomo-actions">
+            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Create free account</a>
+            <a class="btn btn-link fomo-peek" asp-controller="Home" asp-action="Locked">See what's locked 🔒</a>
+        </div>
+    </section>
+}
 
 <section class="card-grid">
     <div class="card">
@@ -226,6 +238,17 @@
                     away.reportValidity();
                 }
             });
+
+            const quick = document.getElementById("quick-match");
+            if (quick) {
+                quick.addEventListener("click", function () {
+                    home.value = quick.dataset.home;
+                    away.value = quick.dataset.away;
+                    validate();
+                    form.scrollIntoView({ behavior: "smooth", block: "center" });
+                    home.focus();
+                });
+            }
         })();
     </script>
 }

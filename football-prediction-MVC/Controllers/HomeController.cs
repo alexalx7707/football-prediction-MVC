@@ -81,6 +81,17 @@ namespace football_prediction_MVC.Controllers
             return View();
         }
 
+        public IActionResult Locked()
+        {
+            // Members already have the real thing — send them there.
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToAction("Index", "User");
+            }
+
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -141,6 +141,26 @@ a:hover {
   font-size: 1.1rem;
 }
 
+.hero-stat-action {
+  font: inherit;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+}
+
+.hero-stat-action .label {
+  color: var(--accent);
+}
+
+.hero-stat-action:hover,
+.hero-stat-action:focus-visible {
+  border-color: var(--accent);
+  background: var(--surface-2);
+  transform: translateY(-2px);
+  outline: none;
+}
+
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -626,4 +646,138 @@ select {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* --- Guest FOMO + locked features --- */
+
+.nav-link-locked {
+  opacity: 0.85;
+}
+
+.nav-lock {
+  font-size: 0.8rem;
+}
+
+.fomo-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 1.75rem;
+  border-radius: 16px;
+  border: 1px solid rgba(83, 194, 107, 0.35);
+  background: linear-gradient(120deg, rgba(83, 194, 107, 0.16), rgba(244, 201, 93, 0.06));
+}
+
+.fomo-text h2 {
+  margin: 0.25rem 0;
+  font-size: 1.4rem;
+}
+
+.fomo-text p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.fomo-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.fomo-peek {
+  color: var(--accent-2);
+  white-space: nowrap;
+}
+
+.locked-hero {
+  text-align: center;
+  padding: 3rem 1.5rem 2.5rem;
+}
+
+.locked-hero h1 {
+  font-family: "Bebas Neue", "Space Grotesk", sans-serif;
+  font-size: clamp(2.4rem, 3.5vw, 3.4rem);
+  margin: 0.5rem 0;
+}
+
+.locked-hero .lead {
+  max-width: 620px;
+  margin: 0 auto 1.75rem;
+  color: var(--muted);
+}
+
+.locked-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.locked-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.locked-card .locked-preview {
+  filter: blur(3px);
+  opacity: 0.55;
+  pointer-events: none;
+  user-select: none;
+}
+
+.locked-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.locked-rows span {
+  display: block;
+  height: 0.9rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.locked-rows span:nth-child(odd) {
+  width: 85%;
+}
+
+.locked-rows span:nth-child(even) {
+  width: 60%;
+}
+
+.lock-badge {
+  position: absolute;
+  top: 0.9rem;
+  right: 1rem;
+  font-size: 1.3rem;
+  z-index: 2;
+}
+
+.locked-tag {
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 2;
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  font-weight: 500;
+  text-align: center;
+  background: rgba(12, 18, 16, 0.85);
+  border: 1px solid rgba(83, 194, 107, 0.35);
+}
+
+.locked-footer-cta {
+  text-align: center;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.locked-footer-cta h2 {
+  margin-bottom: 1.25rem;
 }

@@ -39,6 +39,14 @@
                                 </li>
                             }
                         }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-locked" asp-controller="Home" asp-action="Locked">
+                                    Data Explorer <span class="nav-lock" aria-hidden="true">🔒</span>
+                                </a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
