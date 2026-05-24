@@ -51,6 +51,12 @@ namespace football_prediction_MVC.Controllers
                 return View("Index", model);
             }
 
+            if (string.Equals(model.HomeTeam.Trim(), model.AwayTeam.Trim(), StringComparison.OrdinalIgnoreCase))
+            {
+                model.ErrorMessage = "Home and away teams must be different.";
+                return View("Index", model);
+            }
+
             try
             {
                 var request = new PredictionRequest

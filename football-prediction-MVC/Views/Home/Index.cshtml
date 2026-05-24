@@ -66,7 +66,7 @@
             <div class="alert alert-danger">@Model.ErrorMessage</div>
         }
 
-        <form asp-action="Predict" method="post" class="form-grid">
+        <form asp-action="Predict" method="post" class="form-grid" id="prediction-form">
             <div>
                 <label class="form-label">Home team</label>
                 <input class="form-control" asp-for="HomeTeam" list="team-options" autocomplete="off" placeholder="Start typing a team name" />
@@ -78,6 +78,7 @@
             <div class="form-actions">
                 <button class="btn btn-primary" type="submit">Run prediction</button>
             </div>
+            <p class="field-error" id="same-team-error" hidden>Home and away teams must be different.</p>
         </form>
 
         @if (Model.Teams.Count > 0)
@@ -194,4 +195,37 @@
             </div>
         }
     </section>
+}
+
+@section Scripts {
+    <script>
+        (function () {
+            const form = document.getElementById("prediction-form");
+            if (!form) return;
+            const home = form.querySelector('[name="HomeTeam"]');
+            const away = form.querySelector('[name="AwayTeam"]');
+            const error = document.getElementById("same-team-error");
+
+            function sameTeam() {
+                return home.value.trim() !== "" &&
+                    home.value.trim().toLowerCase() === away.value.trim().toLowerCase();
+            }
+
+            function validate() {
+                const clash = sameTeam();
+                error.hidden = !clash;
+                away.setCustomValidity(clash ? "Home and away teams must be different." : "");
+                return !clash;
+            }
+
+            home.addEventListener("input", validate);
+            away.addEventListener("input", validate);
+            form.addEventListener("submit", function (e) {
+                if (!validate()) {
+                    e.preventDefault();
+                    away.reportValidity();
+                }
+            });
+        })();
+    </script>
 }
