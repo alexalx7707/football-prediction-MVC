@@ -16,6 +16,12 @@ public class MatchQueryParams
     [JsonPropertyName("date_to")]
     public string? DateTo { get; set; }
 
+    [JsonPropertyName("season")]
+    public string? Season { get; set; }
+
+    [JsonPropertyName("order")]
+    public string? Order { get; set; }
+
     [JsonPropertyName("limit")]
     public int Limit { get; set; }
 }

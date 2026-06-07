@@ -42,6 +42,20 @@ builder.Services.AddHttpClient<ITrainingService, TrainingService>((serviceProvid
 builder.Services.AddSingleton<IFunFactRepository, FunFactRepository>();
 builder.Services.AddScoped<IFunFactService, FunFactService>();
 
+// Football assistant chatbot (Claude API + tool use)
+builder.Services.AddScoped<ChatToolExecutor>();
+builder.Services.AddHttpClient<IChatService, ClaudeChatService>((serviceProvider, client) =>
+{
+    var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+    client.BaseAddress = new Uri(configuration["Anthropic:BaseUrl"] ?? "https://api.anthropic.com/");
+    client.DefaultRequestHeaders.Add("x-api-key", configuration["Anthropic:ApiKey"] ?? string.Empty);
+    client.DefaultRequestHeaders.Add("anthropic-version", configuration["Anthropic:Version"] ?? "2023-06-01");
+    client.Timeout = TimeSpan.FromSeconds(120);
+});
+
+// Allow the chat JSON endpoint to validate the antiforgery token from a request header.
+builder.Services.AddAntiforgery(options => options.HeaderName = "RequestVerificationToken");
+
 // Authorization policies
 builder.Services.AddAuthorization(options =>
 {

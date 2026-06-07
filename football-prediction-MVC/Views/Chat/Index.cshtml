@@ -1,0 +1,95 @@
+@{
+    ViewData["Title"] = "Assistant";
+}
+
+<section class="page-header">
+    <div>
+        <h1>Football Assistant</h1>
+        <p class="lead">Ask about match predictions, team Elo ratings, or the dataset.</p>
+    </div>
+    <a class="btn btn-outline-light" asp-controller="User" asp-action="Index">Data Explorer</a>
+</section>
+
+@Html.AntiForgeryToken()
+
+<section class="card chat-card">
+    <div id="chat-log" class="chat-log">
+        <div class="chat-msg assistant">
+            <div class="bubble">
+                Hi! I can predict a match, look up a club's Elo, or explore the dataset.
+                Heads up — my data is from last season, not live.
+            </div>
+        </div>
+    </div>
+    <form id="chat-form" class="chat-input">
+        <input id="chat-text" class="form-control" autocomplete="off"
+               placeholder="e.g. Predict Man City vs Arsenal" />
+        <button class="btn btn-primary" type="submit">Send</button>
+    </form>
+</section>
+
+@section Scripts {
+    <script>
+        (function () {
+            const log = document.getElementById("chat-log");
+            const form = document.getElementById("chat-form");
+            const input = document.getElementById("chat-text");
+            const tokenField = document.querySelector('input[name="__RequestVerificationToken"]');
+            const token = tokenField ? tokenField.value : "";
+            const sendUrl = "@Url.Action("Send", "Chat")";
+            const history = [];
+
+            function addBubble(role, text) {
+                const wrap = document.createElement("div");
+                wrap.className = "chat-msg " + role;
+                const bubble = document.createElement("div");
+                bubble.className = "bubble";
+                bubble.textContent = text;
+                wrap.appendChild(bubble);
+                log.appendChild(wrap);
+                log.scrollTop = log.scrollHeight;
+                return bubble;
+            }
+
+            form.addEventListener("submit", async function (e) {
+                e.preventDefault();
+                const text = input.value.trim();
+                if (!text) return;
+
+                addBubble("user", text);
+                history.push({ role: "user", text: text });
+                input.value = "";
+                input.disabled = true;
+
+                const pending = addBubble("assistant", "…");
+                pending.classList.add("pending");
+
+                try {
+                    const resp = await fetch(sendUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "RequestVerificationToken": token
+                        },
+                        body: JSON.stringify({ messages: history })
+                    });
+                    const data = await resp.json();
+                    pending.classList.remove("pending");
+
+                    if (resp.ok && data.reply) {
+                        pending.textContent = data.reply;
+                        history.push({ role: "assistant", text: data.reply });
+                    } else {
+                        pending.textContent = data.error || "Something went wrong.";
+                    }
+                } catch (err) {
+                    pending.classList.remove("pending");
+                    pending.textContent = "Network error. Please try again.";
+                } finally {
+                    input.disabled = false;
+                    input.focus();
+                }
+            });
+        })();
+    </script>
+}
