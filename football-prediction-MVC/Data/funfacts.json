@@ -1,27 +1,503 @@
 [
-  { "id": 1, "text": "The first official international football match was played in 1872 between Scotland and England, ending in a 0-0 draw." },
-  { "id": 2, "text": "Brazil is the only national team to have played in every FIFA World Cup since the tournament began in 1930." },
-  { "id": 3, "text": "The highest-scoring international match on record was AS Adema 149-0 SO l'Emyrne in Madagascar in 2002 (own goals scored in protest)." },
-  { "id": 4, "text": "Pele scored over 1,000 career goals according to his own count, including unofficial friendlies." },
-  { "id": 5, "text": "The FIFA World Cup trophy is made of solid 18-karat gold and weighs about 6.1 kg." },
-  { "id": 6, "text": "Lionel Messi has won the Ballon d'Or more times than any other player in history." },
-  { "id": 7, "text": "Real Madrid has won more UEFA Champions League / European Cup titles than any other club." },
-  { "id": 8, "text": "The fastest goal ever scored in a top-flight match is credited to Nawaf Al-Abed at around 2 seconds." },
-  { "id": 9, "text": "The first World Cup was held in Uruguay in 1930 and was won by the hosts." },
-  { "id": 10, "text": "Goal-line technology was first used in the FIFA World Cup in 2014, in Brazil." },
-  { "id": 11, "text": "VAR (Video Assistant Referee) was used at a World Cup for the first time in Russia 2018." },
-  { "id": 12, "text": "Manchester United, Liverpool and Arsenal each have storied histories, but only Arsenal has gone an entire Premier League season unbeaten (the 'Invincibles' of 2003-04)." },
-  { "id": 13, "text": "The Old Firm derby between Celtic and Rangers is one of the oldest and fiercest rivalries in football." },
-  { "id": 14, "text": "Football is the most popular sport in the world, with an estimated 4 billion fans globally." },
-  { "id": 15, "text": "The Maracana stadium in Brazil set an attendance record of nearly 200,000 spectators in the 1950 World Cup final." },
-  { "id": 16, "text": "The yellow and red card system was introduced at the 1970 World Cup in Mexico." },
-  { "id": 17, "text": "Cristiano Ronaldo is the all-time top scorer in men's international football." },
-  { "id": 18, "text": "The first-ever penalty kick was awarded in 1891 after the rule was introduced." },
-  { "id": 19, "text": "El Clasico between Real Madrid and Barcelona is the most-watched club match in the world." },
-  { "id": 20, "text": "Boca Juniors and River Plate share the Superclasico, one of the most intense derbies on the planet." },
-  { "id": 21, "text": "Diego Maradona's 'Hand of God' goal against England in 1986 is one of football's most controversial moments." },
-  { "id": 22, "text": "The Bundesliga has the highest average attendance of any football league in the world." },
-  { "id": 23, "text": "Football was originally banned in England several times in the Middle Ages because it distracted men from archery practice." },
-  { "id": 24, "text": "Substitutions were not allowed in the World Cup until 1970." },
-  { "id": 25, "text": "Spain's tiki-taka style won them three consecutive major tournaments: Euro 2008, World Cup 2010, and Euro 2012." }
+  {
+    "id": 1,
+    "text": "The first official international football match was played in 1872 between Scotland and England, ending in a 0-0 draw."
+  },
+  {
+    "id": 2,
+    "text": "Brazil is the only national team to have played in every FIFA World Cup since the tournament began in 1930."
+  },
+  {
+    "id": 3,
+    "text": "The highest-scoring international match on record was AS Adema 149-0 SO l'Emyrne in Madagascar in 2002 (own goals scored in protest)."
+  },
+  {
+    "id": 4,
+    "text": "Pele scored over 1,000 career goals according to his own count, including unofficial friendlies."
+  },
+  {
+    "id": 5,
+    "text": "The FIFA World Cup trophy is made of solid 18-karat gold and weighs about 6.1 kg."
+  },
+  {
+    "id": 6,
+    "text": "Lionel Messi has won the Ballon d'Or more times than any other player in history."
+  },
+  {
+    "id": 7,
+    "text": "Real Madrid has won more UEFA Champions League / European Cup titles than any other club."
+  },
+  {
+    "id": 8,
+    "text": "The fastest goal ever scored in a top-flight match is credited to Nawaf Al-Abed at around 2 seconds."
+  },
+  {
+    "id": 9,
+    "text": "The first World Cup was held in Uruguay in 1930 and was won by the hosts."
+  },
+  {
+    "id": 10,
+    "text": "Goal-line technology was first used in the FIFA World Cup in 2014, in Brazil."
+  },
+  {
+    "id": 11,
+    "text": "VAR (Video Assistant Referee) was used at a World Cup for the first time in Russia 2018."
+  },
+  {
+    "id": 12,
+    "text": "Manchester United, Liverpool and Arsenal each have storied histories, but only Arsenal has gone an entire Premier League season unbeaten (the 'Invincibles' of 2003-04)."
+  },
+  {
+    "id": 13,
+    "text": "The Old Firm derby between Celtic and Rangers is one of the oldest and fiercest rivalries in football."
+  },
+  {
+    "id": 14,
+    "text": "Football is the most popular sport in the world, with an estimated 4 billion fans globally."
+  },
+  {
+    "id": 15,
+    "text": "The Maracana stadium in Brazil set an attendance record of nearly 200,000 spectators in the 1950 World Cup final."
+  },
+  {
+    "id": 16,
+    "text": "The yellow and red card system was introduced at the 1970 World Cup in Mexico."
+  },
+  {
+    "id": 17,
+    "text": "Cristiano Ronaldo is the all-time top scorer in men's international football."
+  },
+  {
+    "id": 18,
+    "text": "The first-ever penalty kick was awarded in 1891 after the rule was introduced."
+  },
+  {
+    "id": 19,
+    "text": "El Clasico between Real Madrid and Barcelona is the most-watched club match in the world."
+  },
+  {
+    "id": 20,
+    "text": "Boca Juniors and River Plate share the Superclasico, one of the most intense derbies on the planet."
+  },
+  {
+    "id": 21,
+    "text": "Diego Maradona's 'Hand of God' goal against England in 1986 is one of football's most controversial moments."
+  },
+  {
+    "id": 22,
+    "text": "The Bundesliga has the highest average attendance of any football league in the world."
+  },
+  {
+    "id": 23,
+    "text": "Football was originally banned in England several times in the Middle Ages because it distracted men from archery practice."
+  },
+  {
+    "id": 24,
+    "text": "Substitutions were not allowed in the World Cup until 1970."
+  },
+  {
+    "id": 25,
+    "text": "Spain's tiki-taka style won them three consecutive major tournaments: Euro 2008, World Cup 2010, and Euro 2012."
+  },
+  {
+    "id": 26,
+    "text": "Hakan Şükür of Turkey scored the fastest goal in World Cup history — just 11 seconds into the third-place match against South Korea in 2002."
+  },
+  {
+    "id": 27,
+    "text": "The term 'soccer' actually originated in England, as slang derived from 'assoc.' — an abbreviation of 'association' football."
+  },
+  {
+    "id": 28,
+    "text": "Goalkeeper Rogerio Ceni of São Paulo FC scored over 130 career goals, more than many professional strikers."
+  },
+  {
+    "id": 29,
+    "text": "Paolo Maldini played every minute of his 25-year professional career at AC Milan — the only club he ever represented."
+  },
+  {
+    "id": 30,
+    "text": "The penalty shootout was invented by a German referee named Karl Wald in 1970 and was first used in competitive football in 1976."
+  },
+  {
+    "id": 31,
+    "text": "Pelé is the only player in history to have won three FIFA World Cups, doing so in 1958, 1962, and 1970."
+  },
+  {
+    "id": 32,
+    "text": "Leicester City's 2015–16 Premier League title was won at odds of 5000-1 at the start of the season."
+  },
+  {
+    "id": 33,
+    "text": "The offside rule originally required three opponents between the attacker and the goal before it was changed to two in 1925, triggering an immediate explosion in goals scored."
+  },
+  {
+    "id": 34,
+    "text": "Didier Drogba negotiated a ceasefire in Ivory Coast's civil war through sheer force of personality after his team's World Cup qualification in 2005."
+  },
+  {
+    "id": 35,
+    "text": "Hungary's 'Mighty Magyars' were unbeaten for 32 matches between 1950 and 1954, only to lose the World Cup final to West Germany in one of football's greatest upsets."
+  },
+  {
+    "id": 36,
+    "text": "The fastest red card in professional football history was issued after just 2 seconds, to David Pratt of Chippenham Town in 2008."
+  },
+  {
+    "id": 37,
+    "text": "Carlos Kaiser was a Brazilian footballer who faked an entire professional career for nearly two decades by never actually playing in a competitive match."
+  },
+  {
+    "id": 38,
+    "text": "Juventus were stripped of two Serie A titles and relegated to Serie B in 2006 following the Calciopoli match-fixing scandal."
+  },
+  {
+    "id": 39,
+    "text": "Celtic's 1967 European Cup squad was composed entirely of players born within 30 miles of Celtic Park in Glasgow."
+  },
+  {
+    "id": 40,
+    "text": "The ball used in the 1930 World Cup final was disputed — Argentina and Uruguay each used a different ball, so they agreed to play one half with each."
+  },
+  {
+    "id": 41,
+    "text": "Brazil wore all-white jerseys before the trauma of their 1950 World Cup defeat to Uruguay at home prompted a complete kit redesign to the now-iconic yellow."
+  },
+  {
+    "id": 42,
+    "text": "Socrates, Brazil's iconic 1980s midfielder, was also a fully qualified physician and wrote a philosophy column for a major Brazilian newspaper."
+  },
+  {
+    "id": 43,
+    "text": "Luís Figo's move from Barcelona to Real Madrid in 2000 caused such fury that a pig's head was thrown at him during his first return El Clásico."
+  },
+  {
+    "id": 44,
+    "text": "The record winning margin in a World Cup match is 10–0, scored by Hungary against El Salvador in 1982."
+  },
+  {
+    "id": 45,
+    "text": "Johan Cruyff refused to play in the 1978 World Cup in Argentina as a protest against the country's military dictatorship — his squad reached the final without him."
+  },
+  {
+    "id": 46,
+    "text": "The Panenka penalty — chipping the ball down the middle — is named after Czech midfielder Antonín Panenka, who used it to win Euro 1976."
+  },
+  {
+    "id": 47,
+    "text": "Denmark won Euro 1992 despite only being invited 10 days before the tournament started, after Yugoslavia were disqualified due to the civil war."
+  },
+  {
+    "id": 48,
+    "text": "Gerd Müller scored 68 goals in just 62 international appearances for West Germany — one of the most prolific ratios in international football history."
+  },
+  {
+    "id": 49,
+    "text": "The 1950 World Cup had no final match — Uruguay won the tournament by topping a final round-robin group, making their victory even more dramatic."
+  },
+  {
+    "id": 50,
+    "text": "Morocco became the first African and first Arab nation to reach a World Cup semifinal, achieving the feat at the 2022 tournament in Qatar."
+  },
+  {
+    "id": 51,
+    "text": "The fastest goal in Premier League history was scored by Shane Long in 7.69 seconds for Southampton against Watford in April 2019."
+  },
+  {
+    "id": 52,
+    "text": "Roberto Carlos's famous free-kick against France in 1997 defied physics — the ball initially moved a full metre outside the post before curving into the net."
+  },
+  {
+    "id": 53,
+    "text": "Pablo Escobar's Medellín Cartel heavily funded Colombian football in the 1980s, and Andrés Escobar was murdered just 10 days after scoring an own goal at the 1994 World Cup."
+  },
+  {
+    "id": 54,
+    "text": "Saudi Arabia defeated Argentina 2–1 in the 2022 World Cup group stage — one of the greatest upsets in the tournament's 92-year history."
+  },
+  {
+    "id": 55,
+    "text": "Borussia Dortmund's 'Yellow Wall' (Südtribüne) is the largest standing terrace in European football, accommodating over 24,000 standing supporters."
+  },
+  {
+    "id": 56,
+    "text": "Germany demolished Brazil 7–1 in the 2014 World Cup semifinal on Brazilian soil — a match so traumatic it became known simply as the 'Mineirazo'."
+  },
+  {
+    "id": 57,
+    "text": "Bert Trautmann, Manchester City's goalkeeper, played the last 15 minutes of the 1956 FA Cup Final with a broken neck — and only discovered this days after the match."
+  },
+  {
+    "id": 58,
+    "text": "The first Football World Cup trophy, the Jules Rimet Trophy, was stolen in England in 1966 before the tournament and found by a dog named Pickles."
+  },
+  {
+    "id": 59,
+    "text": "Barcelona's La Masia academy simultaneously produced Messi, Xavi, and Iniesta — arguably the most talented trio of graduates in the history of any football academy."
+  },
+  {
+    "id": 60,
+    "text": "El Salvador and Honduras fought the 'Football War' in 1969 — a brief military conflict that was triggered by social tensions inflamed by a World Cup qualifying series."
+  },
+  {
+    "id": 61,
+    "text": "The 1970 World Cup ball, the Telstar, was specifically designed with a black-and-white pattern to be visible on black-and-white television screens."
+  },
+  {
+    "id": 62,
+    "text": "Paolo Rossi was serving a ban for match-fixing when he was recalled and rushed into Italy's squad, going on to win the Golden Boot at the 1982 World Cup."
+  },
+  {
+    "id": 63,
+    "text": "Victor Hugo Morales's radio commentary of Maradona's 'Goal of the Century' — 'Barrilete Cósmico! What planet are you from?' — is the most celebrated piece of sports commentary in the Spanish language."
+  },
+  {
+    "id": 64,
+    "text": "The record for the most consecutive seasons in a country's top flight is held by Rangers, who played 101 straight seasons in the Scottish top division before their 2012 liquidation."
+  },
+  {
+    "id": 65,
+    "text": "Goalkeeper Jerzy Dudek's famous 'spaghetti legs' wobble on his goal line in the 2005 Champions League Final penalty shootout psychologically shattered AC Milan's players."
+  },
+  {
+    "id": 66,
+    "text": "Lev Yashin is the only goalkeeper in history to have saved over 150 penalty kicks in professional football."
+  },
+  {
+    "id": 67,
+    "text": "Athletic Club Bilbao have never been relegated from the Spanish top flight and only ever sign players with documented Basque heritage."
+  },
+  {
+    "id": 68,
+    "text": "Marta of Brazil became the first player in history — male or female — to score at five consecutive World Cups."
+  },
+  {
+    "id": 69,
+    "text": "Porto's 2004 Champions League triumph under José Mourinho remains one of the greatest managerial achievements in European football history, built on a budget a fraction of their rivals."
+  },
+  {
+    "id": 70,
+    "text": "The 'Battle of Santiago' at the 1962 World Cup between Chile and Italy was so violent that the BBC commentator called it 'the most disgraceful exhibition of football ever seen'."
+  },
+  {
+    "id": 71,
+    "text": "Goalkeepers were not allowed to handle back passes from teammates until 1992, when the rule was changed to prevent time-wasting."
+  },
+  {
+    "id": 72,
+    "text": "The fastest international goal in history was scored by Davide Gualtieri of San Marino against England in 1993 — after just 8.3 seconds, before most England fans had taken their seats."
+  },
+  {
+    "id": 73,
+    "text": "Ossie Ardiles and Ricardo Villa moved from Argentina to Tottenham Hotspur just weeks after winning the 1978 World Cup, pioneering the wave of South American players in English football."
+  },
+  {
+    "id": 74,
+    "text": "Roger Milla of Cameroon became the oldest World Cup goalscorer in 1990 at age 38, then broke his own record in 1994 at age 42."
+  },
+  {
+    "id": 75,
+    "text": "Neymar's €222 million transfer from Barcelona to PSG in 2017 remains the most expensive transfer in the history of football."
+  },
+  {
+    "id": 76,
+    "text": "Just Fontaine of France scored 13 goals in a single World Cup tournament in 1958 — a record that has stood for over 65 years."
+  },
+  {
+    "id": 77,
+    "text": "Fiorentina's iconic purple kit was adopted by accident — a batch of white jerseys was accidentally ruined in the wash and dyed purple, and the color was kept permanently."
+  },
+  {
+    "id": 78,
+    "text": "Corinthian FC, the English amateur club, famously refused to deploy a goalkeeper during penalty kicks — they considered it unsporting to defend a penalty, as taking one implied a deliberate foul."
+  },
+  {
+    "id": 79,
+    "text": "Ajax's 1995 Champions League winning squad had an average age of just 23 years, making it the youngest side ever to win the competition."
+  },
+  {
+    "id": 80,
+    "text": "The Bosman ruling of 1995 transformed football forever by granting players the legal right to move clubs for free at the end of their contracts."
+  },
+  {
+    "id": 81,
+    "text": "Spain's La Roja are the only national team to have simultaneously held the top FIFA ranking in both men's and women's football."
+  },
+  {
+    "id": 82,
+    "text": "Zinedine Zidane headbutted Marco Materazzi in extra time of the 2006 World Cup Final — and still won the Golden Ball as the tournament's best player."
+  },
+  {
+    "id": 83,
+    "text": "Monaco's 2016–17 Champions League squad — built almost entirely of teenagers — knocked Manchester City out 6–3 on aggregate and was subsequently sold for over £400 million."
+  },
+  {
+    "id": 84,
+    "text": "The record number of red cards in a single professional match is 36, in a Paraguayan league game in 2011 where both squads and coaching staffs were dismissed."
+  },
+  {
+    "id": 85,
+    "text": "Gordon Banks's save from Pelé's header at the 1970 World Cup — diving right to scoop the ball away — was described by Pelé himself as the greatest save he ever witnessed."
+  },
+  {
+    "id": 86,
+    "text": "Messi's first professional contract with Barcelona was reportedly written on a paper napkin because no proper contract paper was available when the director agreed to sign him."
+  },
+  {
+    "id": 87,
+    "text": "George Best was described by Pelé as the greatest footballer he ever saw — an assessment many in Northern Ireland still hold above any other."
+  },
+  {
+    "id": 88,
+    "text": "Karim Benzema won the 2022 Ballon d'Or at age 34 — becoming the third-oldest winner in the award's history — after years of being overlooked for France's national team."
+  },
+  {
+    "id": 89,
+    "text": "Only one player has ever won the Champions League with three different clubs: Clarence Seedorf, with Ajax, Real Madrid, and AC Milan."
+  },
+  {
+    "id": 90,
+    "text": "Carlo Ancelotti is the only manager to have won the Champions League with three different clubs — AC Milan, Real Madrid, and Real Madrid again across different eras."
+  },
+  {
+    "id": 91,
+    "text": "Erling Haaland shattered the Premier League's all-time single-season scoring record by netting 36 league goals in his debut 2022–23 season with Manchester City."
+  },
+  {
+    "id": 92,
+    "text": "The 1977 European Cup Final between Liverpool and Borussia Mönchengladbach is widely credited as the match that began an era of English dominance in European football."
+  },
+  {
+    "id": 93,
+    "text": "Ronaldinho received a standing ovation from Real Madrid fans at the Bernabéu in 2005 after his dribbling display — an almost unheard-of gesture of respect from rival supporters."
+  },
+  {
+    "id": 94,
+    "text": "Torino were the dominant force in Italian football before the Superga air disaster of 1949, which killed their entire first team and altered the course of Italian football history."
+  },
+  {
+    "id": 95,
+    "text": "Nigeria's Asisat Oshoala has won the African Women's Player of the Year award more times than anyone else — six times — making her the continent's most decorated women's footballer."
+  },
+  {
+    "id": 96,
+    "text": "Japan beat both Germany and Spain at the 2022 World Cup — two former world champions — to top a group containing some of the most storied nations in football history."
+  },
+  {
+    "id": 97,
+    "text": "Gareth Southgate missed the penalty that knocked England out of Euro 1996, and nearly three decades later managed England to the final of Euro 2020 and Euro 2024."
+  },
+  {
+    "id": 98,
+    "text": "The 2002 World Cup began with a seismic opening round: holders France and favourites Argentina were both eliminated in the group stage without either team advancing."
+  },
+  {
+    "id": 99,
+    "text": "Kylian Mbappé signed a contract extension with PSG in 2022 reportedly worth €630 million over three years, making it the most lucrative contract in sports history at the time."
+  },
+  {
+    "id": 100,
+    "text": "The first ever Premier League goal was scored by Brian Deane of Sheffield United against Manchester United on 15 August 1992 — within the first five minutes of the league's opening day."
+  },
+  {
+    "id": 101,
+    "text": "Sevilla have won the UEFA Cup / Europa League more times than any other club — seven titles, more than twice as many as the next most successful team."
+  },
+  {
+    "id": 102,
+    "text": "Miroslav Klose's 16th World Cup goal — scored against Brazil in the 7–1 semifinal — made him the all-time leading scorer in World Cup history, overtaking Ronaldo."
+  },
+  {
+    "id": 103,
+    "text": "The 'Christmas Truce' football matches of 1914 took place across multiple points on the Western Front, as German and British soldiers spontaneously played football in No Man's Land."
+  },
+  {
+    "id": 104,
+    "text": "Iceland became the smallest nation ever to qualify for a World Cup when they reached Russia 2018 with a population of just 330,000 people."
+  },
+  {
+    "id": 105,
+    "text": "Ada Hegerberg, the first winner of the women's Ballon d'Or in 2018, declined to perform a twerk when asked by the awards host on live television, making a quiet but powerful statement."
+  },
+  {
+    "id": 106,
+    "text": "Andrés Iniesta scored the winning goal of the 2010 World Cup Final in the 116th minute — the latest ever winning goal in a World Cup Final."
+  },
+  {
+    "id": 107,
+    "text": "Wales qualified for the 2022 World Cup for the first time since 1958 — a 64-year gap between appearances, the longest absence for any European nation that returned."
+  },
+  {
+    "id": 108,
+    "text": "Bayer Leverkusen completed the entire 2023–24 Bundesliga season unbeaten, also winning the DFB-Pokal — the first domestic double in the club's history."
+  },
+  {
+    "id": 109,
+    "text": "Luka Modrić won the 2018 Ballon d'Or, ending the decade-long monopoly held by Messi and Ronaldo and becoming the first Croatian — and midfielder — to claim the award."
+  },
+  {
+    "id": 110,
+    "text": "The Maracanã originally held nearly 200,000 fans in 1950, but safety regulations and renovations have reduced it to a 78,000-seat stadium today."
+  },
+  {
+    "id": 111,
+    "text": "Pep Guardiola's Manchester City set the all-time Premier League points record with 100 points in the 2017–18 season — the first team in England's top flight to reach a century."
+  },
+  {
+    "id": 112,
+    "text": "Argentina went 36 matches unbeaten between 2019 and 2022, ending the run by winning the World Cup in Qatar — their first title in 36 years."
+  },
+  {
+    "id": 113,
+    "text": "Gary Lineker was never booked or sent off in his entire professional career — a remarkable record for a striker competing in top-level football across three decades."
+  },
+  {
+    "id": 114,
+    "text": "Portugal's Euro 2016 win came despite the team failing to win any of their first three group stage matches — making them the only major tournament winners not to win a game in the opening round."
+  },
+  {
+    "id": 115,
+    "text": "Napoli's 2022–23 Serie A title ended a 33-year wait and was achieved with one of the most dominant single-season campaigns in Italian football history, finishing 16 points clear."
+  },
+  {
+    "id": 116,
+    "text": "Brazil's iconic yellow jersey was designed by a 19-year-old art student named Aldyr Garcia Schlee, who won a national competition held after the traumatic 1950 World Cup defeat."
+  },
+  {
+    "id": 117,
+    "text": "Scotland invented the passing game of football in the 1870s — before their influence, English teams simply dribbled and kicked the ball forward in a chaotic mob."
+  },
+  {
+    "id": 118,
+    "text": "The 1954 World Cup produced more goals than any other tournament in history, with an extraordinary average of 5.38 goals per game."
+  },
+  {
+    "id": 119,
+    "text": "Jorginho won the Champions League, Serie A, and Euro 2020 all within the same calendar year in 2021 — an achievement no other player managed to replicate."
+  },
+  {
+    "id": 120,
+    "text": "Eric Cantona's kung-fu kick on a Crystal Palace fan in January 1995 earned him a nine-month ban from all football and 120 hours of community service."
+  },
+  {
+    "id": 121,
+    "text": "Liverpool's 2019–20 Premier League title ended a 30-year wait for the club and was won by a record margin of 18 points — the most dominant title campaign in modern English football."
+  },
+  {
+    "id": 122,
+    "text": "The Corinthians of São Paulo operated as a fan-owned democracy in the early 1980s, giving equal votes to players, coaches, and staff in all club decisions — an experiment called 'Corinthian Democracy'."
+  },
+  {
+    "id": 123,
+    "text": "Sergio Agüero's 93:20 title-winning goal against QPR in 2012 — immortalized by commentator Martin Tyler's 'Agueroooo!' — is the most dramatic moment in Premier League history."
+  },
+  {
+    "id": 124,
+    "text": "Ronaldinho's overhead kick against Villarreal in 2004 — struck from an almost impossible angle with his back to goal — was voted the La Liga goal of the decade."
+  },
+  {
+    "id": 125,
+    "text": "Iran's Ali Daei held the world record for international goals (109) for nearly two decades before Cristiano Ronaldo finally surpassed him in 2021."
+  }
+
 ]
